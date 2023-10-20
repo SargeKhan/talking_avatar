@@ -12,9 +12,11 @@ import blinkData from './blendDataBlink.json';
 
 import * as THREE from 'three';
 import axios from 'axios';
+import SpeechRecognition from './SpeechRecognition';
+import { chatWithOpenAI } from './apis/chatgpt';
 const _ = require('lodash');
 
-const host = 'http://localhost:5000'
+const host = 'http://localhost:5001'
 
 function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing }) {
 
@@ -313,14 +315,32 @@ function App() {
     audioPlayer.current.audioEl.current.play();
     setPlaying(true);
 
-  }  
+  } 
+
+  async function onUserSpeechComplete(userText) {
+    await chatWithOpenAI(userText).then(setText);
+    setSpeak(true);
+  }
 
   return (
     <div className="full">
+      <div style={{position: 'absolute', top: '10px', left: '10px', zIndex: 500}}>
+        <button style={{marginRight: '10px'}}>Step 1</button>
+        <button style={{marginRight: '10px'}}>Step 2</button>
+        <button>Step 3</button>
+      </div>
       <div style={STYLES.area}>
         <textarea rows={4} type="text" style={STYLES.text} value={text} onChange={(e) => setText(e.target.value.substring(0, 200))} />
         <button onClick={() => setSpeak(true)} style={STYLES.speak}> { speak? 'Running...': 'Speak' }</button>
+        <SpeechRecognition onUserSpeechComplete={onUserSpeechComplete}/>
+      </div>
 
+      <div style={STYLES.area2}>
+        <p style={STYLES.text}>1- Assalam o alikum ammi, apka kiya haal hai?</p>
+        <p style={STYLES.text}>2- Boolein Bismillah.</p>
+        <p style={STYLES.text}>3- Boolein Pakistan zindabad</p>
+        <input type="number" onChange={(e) => setText(e.target.value === '1' ? "Assalam o alikum ammi, apka kiya haal hai?" : e.target.value === '2' ? "Boolein Bismillah." : e.target.value === '3' ? "Boolein Pakistan zindabad" : "")} />
+        <button onClick={() => setSpeak(true)} style={STYLES.speak}> { speak? 'Running...': 'Speak' }</button>
       </div>
 
       <ReactAudioPlayer
