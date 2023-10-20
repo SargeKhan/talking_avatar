@@ -26,8 +26,8 @@ export async function chatWithOpenAI(userInput) {
   
   try {
       const response = await axios.post(endpoint, data, { headers });
-      console.log('Response:', response.data.choices[0].text.trim());
-      const responseText = response.data.choices[0].text.trim();
+      console.log('Response:', response.data);
+      const responseText = response.data.choices[0].message.content.trim();
       return responseText;
   } catch (error) {
     console.error('Error:', error);

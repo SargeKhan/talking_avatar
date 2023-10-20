@@ -14,7 +14,7 @@ const Dictaphone = ({onUserSpeechComplete}) => {
         if (!listening && transcript !== '') {
             onUserSpeechComplete(transcript)
         }
-    }, [listening, onUserSpeechComplete]);
+    }, [listening]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
