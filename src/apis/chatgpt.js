@@ -1,5 +1,8 @@
 import axios from "axios";
-const openAIKey = process.env.OPEN_AI_API_KEY || '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';
+import constants from '../constants'
+
+const openAIKey = constants.apikey;
+
 const systemMessage = "You are a speech therapist. You are having a face to face conversation with a patient. So respond as if you would be talking to a patient"
 
 export async function chatWithOpenAI(userInput) {

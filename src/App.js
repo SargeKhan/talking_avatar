@@ -10,6 +10,7 @@ import ReactAudioPlayer from 'react-audio-player';
 import SpeechRecognition from './components/SpeechRecognition';
 import { chatWithOpenAI } from './apis/chatgpt';
 import { makeSpeech } from './apis/backend'
+import Sidebar from './components/SessionProgressSidebarSection';
 const _ = require('lodash');
 
 function App() {
@@ -48,23 +49,19 @@ function App() {
 
   return (
     <div className="full">
-      <div style={{position: 'absolute', top: '10px', left: '10px', zIndex: 500}}>
+      <div style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 500 }}>
         <button style={{marginRight: '10px'}}>Step 1</button>
         <button style={{marginRight: '10px'}}>Step 2</button>
         <button>Step 3</button>
+      </div>
+
+      <div class="absolute top-1/2 transform -translate-y-1/2 z-50">
+        <Sidebar />
       </div>
       <div style={STYLES.area}>
         <textarea rows={4} type="text" style={STYLES.text} value={text} onChange={(e) => setText(e.target.value.substring(0, 200))} />
         <button onClick={() => setSpeak(true)} style={STYLES.speak}> { speak? 'Running...': 'Speak' }</button>
         <SpeechRecognition onUserSpeechComplete={onUserSpeechComplete}/>
-      </div>
-
-      <div style={STYLES.area2}>
-        <p style={STYLES.text}>1- Assalam o alikum ammi, apka kiya haal hai?</p>
-        <p style={STYLES.text}>2- Boolein Bismillah.</p>
-        <p style={STYLES.text}>3- Boolein Pakistan zindabad</p>
-        <input type="number" onChange={(e) => setText(e.target.value === '1' ? "Assalam o alikum ammi, apka kiya haal hai?" : e.target.value === '2' ? "Boolein Bismillah." : e.target.value === '3' ? "Boolein Pakistan zindabad" : "")} />
-        <button onClick={() => setSpeak(true)} style={STYLES.speak}> { speak? 'Running...': 'Speak' }</button>
       </div>
 
       <ReactAudioPlayer
