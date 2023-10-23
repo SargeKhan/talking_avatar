@@ -8,7 +8,6 @@ import Bg from './components/Bg';
 import ReactAudioPlayer from 'react-audio-player';
 
 import SpeechRecognition from './components/SpeechRecognition';
-import { chatWithOpenAI } from './apis/chatgpt';
 import { getChatResponse, makeSpeech } from './apis/backend'
 import Sidebar from './components/SessionProgressSidebarSection';
 const _ = require('lodash');
