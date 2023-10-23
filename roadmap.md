@@ -6,9 +6,9 @@ Initially, I've thought only about the speech impairement that mom had. However,
 
 Roadmap / Plan for the next few weeks; 
 - Clean up the code so that it's easier for anyone to work with the tool. This means:
-    - Remove the API key from the codebase
-    - Remove the speech therapy session progress sidebar; 
-    - Remove communicatating using a dialog box/ chatbox.
-    - Add a very visual "Press space to speak" button.
+    - [ ] Remove the API key from the codebase
+    - [x] Remove the speech therapy session progress sidebar; 
+    - [x] Remove communicatating using a dialog box/ chatbox.
+    - [x] Add a very visual "Press space to speak" button.
 - Ask Haris to build a website. With three main usecases or one website for each usecase.
 - Talk with Kashif and assign him a few tasks.

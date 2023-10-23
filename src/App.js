@@ -9,7 +9,7 @@ import ReactAudioPlayer from 'react-audio-player';
 
 import SpeechRecognition from './components/SpeechRecognition';
 import { chatWithOpenAI } from './apis/chatgpt';
-import { makeSpeech } from './apis/backend'
+import { getChatResponse, makeSpeech } from './apis/backend'
 import Sidebar from './components/SessionProgressSidebarSection';
 const _ = require('lodash');
 
@@ -29,7 +29,7 @@ function App() {
     setPlaying(false);
   }
 
-  // Player is read
+  // Player is ready
   function playerReady(e) {
     audioPlayer.current.audioEl.current.play();
     setPlaying(true);
@@ -38,30 +38,35 @@ function App() {
 
   async function onUserSpeechComplete(userText) {
     try {
-      const text = await chatWithOpenAI(userText)
-      setText(text)
       setSpeak(true);
+      setText(userText);
     } catch (error) {
-      setText("failed to talk to AI agent")
-      setSpeak(true);
+      throw error;
     }
   }
 
   return (
     <div className="full">
+
+      
+      { /* 
       <div style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 500 }}>
         <button style={{marginRight: '10px'}}>Step 1</button>
         <button style={{marginRight: '10px'}}>Step 2</button>
         <button>Step 3</button>
       </div>
+  */}
 
-      <div class="absolute top-1/2 transform -translate-y-1/2 z-50">
+      {/* <div class="absolute top-1/2 transform -translate-y-1/2 z-50">
         <Sidebar />
-      </div>
-      <div style={STYLES.area}>
+      </div> */}
+      <div className="w-full absolute bottom-10 p-10 z-50">
+        {/* 
+        <div className="" style={STYLES.area}>
         <textarea rows={4} type="text" style={STYLES.text} value={text} onChange={(e) => setText(e.target.value.substring(0, 200))} />
         <button onClick={() => setSpeak(true)} style={STYLES.speak}> { speak? 'Running...': 'Speak' }</button>
-        <SpeechRecognition onUserSpeechComplete={onUserSpeechComplete}/>
+*/}
+      <SpeechRecognition onUserSpeechComplete={onUserSpeechComplete} />
       </div>
 
       <ReactAudioPlayer
@@ -104,7 +109,7 @@ function App() {
             speak={speak} 
             setSpeak={setSpeak}
             text={text}
-            makeSpeech={makeSpeech}
+            makeSpeech={getChatResponse}
             setAudioSource={setAudioSource}
             playing={playing}
             />
