@@ -1,10 +1,6 @@
 import {
 	AnimationClip,
-	BooleanKeyframeTrack,
-	ColorKeyframeTrack,
 	NumberKeyframeTrack,
-	Vector3,
-	VectorKeyframeTrack
 } from 'three';
 
 var fps = 60

@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import constants from '../constants';
-import React, { Suspense, useEffect, useRef, useState, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, useTexture, Loader, Environment, useFBX, useAnimations, OrthographicCamera } from '@react-three/drei';
+import React, { useEffect, useState, useMemo } from 'react'
+import { useFrame } from '@react-three/fiber'
+import { useGLTF, useFBX, useAnimations } from '@react-three/drei';
 import { MeshStandardMaterial } from 'three/src/materials/MeshStandardMaterial';
 
-import { LinearEncoding, sRGBEncoding } from 'three/src/constants';
+import { LinearEncoding } from 'three/src/constants';
 import { LineBasicMaterial, MeshPhysicalMaterial, Vector2 } from 'three';
 
 import createAnimation from '../converter';
@@ -213,7 +213,7 @@ export default function Avatar({ avatar_url, speak, setSpeak, text, setAudioSour
 
   
   useFrame((state, delta) => {
-    mixer.update(delta);
+    mixer.update(delta * 1.5);
   });
 
 

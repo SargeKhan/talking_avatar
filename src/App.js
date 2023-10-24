@@ -31,8 +31,8 @@ function App() {
   // Player is ready
   function playerReady(e) {
     audioPlayer.current.audioEl.current.play();
+    audioPlayer.current.audioEl.current.playbackRate = 1.5;
     setPlaying(true);
-
   } 
 
   async function onUserSpeechComplete(userText) {
