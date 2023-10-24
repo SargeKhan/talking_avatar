@@ -2,7 +2,7 @@ import _ from 'lodash';
 import constants from '../constants';
 import React, { useEffect, useState, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { useGLTF, useFBX, useAnimations } from '@react-three/drei';
+import { useGLTF, useFBX, useAnimations, Html } from '@react-three/drei';
 import { MeshStandardMaterial } from 'three/src/materials/MeshStandardMaterial';
 
 import { LinearEncoding } from 'three/src/constants';
@@ -14,7 +14,7 @@ import blinkData from '../blendDataBlink.json';
 import * as THREE from 'three';
 import { useAvatarTextures } from '../textures/textures';
 
-export default function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing, makeSpeech }) {
+export default function Avatar({ avatar_url, speak, setSpeak, text, setAudioSource, playing, makeSpeech, setIsLoading }) {
 
   let gltf = useGLTF(avatar_url);
   let morphTargetDictionaryBody = null;
@@ -136,8 +136,10 @@ export default function Avatar({ avatar_url, speak, setSpeak, text, setAudioSour
     if (speak === false)
       return;
 
+    setIsLoading(true);
     makeSpeech(text)
     .then( response => {
+      setIsLoading(false)
 
       let {blendData, filename}= response.data;
 
@@ -152,6 +154,7 @@ export default function Avatar({ avatar_url, speak, setSpeak, text, setAudioSour
 
     })
     .catch(err => {
+      setIsLoading(false)
       console.error(err);
       setSpeak(false);
 
@@ -224,3 +227,9 @@ export default function Avatar({ avatar_url, speak, setSpeak, text, setAudioSour
   );
 }
 
+
+const Spinner = () => (
+    <div className="absolute w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+        <div className="animate-spin w-10 h-10 border-t-2 border-b-2 border-blue-500 rounded-full"></div>
+    </div>
+);

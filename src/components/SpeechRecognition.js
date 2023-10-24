@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 
-const Dictaphone = ({onUserSpeechComplete}) => {
+const Dictaphone = ({onUserSpeechComplete, isLoading}) => {
   const {
     transcript,
     listening,
@@ -42,12 +42,12 @@ const Dictaphone = ({onUserSpeechComplete}) => {
    <div className="bg-gray-200 p-4 rounded-lg shadow-md w-full">
      <p className="mb-4 text-center w-full">Press "Space" to start talking to the me</p>
       <p className="mb-4 text-center w-full">Microphone: {listening ? 'on' : 'off'}</p>
+      <p className="mb-4 text-center w-full">Status: {isLoading ? 'Loading...' : 'Ready..'}</p>
       <div className="mb-4 text-center w-full">
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" onClick={SpeechRecognition.startListening}>Start</button>
         <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2" onClick={SpeechRecognition.stopListening}>Stop</button>
         <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" onClick={resetTranscript}>Reset</button>
       </div>
-      <p className="mb-4 text-center w-full">{transcript}</p>
    </div>
   );
 };
