@@ -39,7 +39,11 @@ const Dictaphone = ({onUserSpeechComplete, isLoading}) => {
   }
 
   return (
-   <div className="bg-gray-200 p-4 rounded-lg shadow-md w-full">
+   <div>
+    <div className="visible md:invisible">
+        <button className="mb-4 text-center w-full" onClick={SpeechRecognition.startListening}>Tap to start speaking</button>
+    </div>
+    <div className="invisible md:visible bg-gray-200 p-4 rounded-lg shadow-md w-full">
      <p className="mb-4 text-center w-full">Press "Space" to start talking to the me</p>
       <p className="mb-4 text-center w-full">Microphone: {listening ? 'on' : 'off'}</p>
       <p className="mb-4 text-center w-full">Status: {isLoading ? 'Loading...' : 'Ready..'}</p>
@@ -48,7 +52,8 @@ const Dictaphone = ({onUserSpeechComplete, isLoading}) => {
         <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2" onClick={SpeechRecognition.stopListening}>Stop</button>
         <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" onClick={resetTranscript}>Reset</button>
       </div>
-   </div>
+      </div>
+    </div>
   );
 };
 export default Dictaphone;

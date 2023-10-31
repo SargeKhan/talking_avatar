@@ -9,10 +9,16 @@ A ThreeJS-powered virtual human being that uses a set of neat [Azure APIs](https
 Add Chat GPT to the mix and maybe you can have for yourself a nice face to chat with. 🙂
 
 
-## Run
+### To run
+1- Install docker on the system (search internet).
+2- While in the project directory, build image
+
 ```
-$ yarn install
-$ yarn start
+docker build -t avatar_front_end .
+```
+3- Run docker
+```
+docker run -p 3000:3000 avatar_front_end
 ```
 
 ## Backend
